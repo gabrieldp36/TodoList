@@ -1,6 +1,14 @@
+// Importaciones y exportaciones.
+
+import { Todo } from "../classes";
+
+import { todoList } from "../index";
+
 // Referencias HTML.
 
 const divTodoList = document.querySelector('.todo-list');
+
+const txtInput = document.querySelector('.new-todo');
 
 export const crearTodoHtml = (todo) => {
 
@@ -21,3 +29,23 @@ export const crearTodoHtml = (todo) => {
 
     return div.firstElementChild;
 };
+
+// Eventos.
+
+txtInput.addEventListener('keyup', (event) => {
+
+    if (event.keyCode === 13 && event.target.value.length > 0) {
+
+        const nuevoTodo = new Todo (event.target.value);
+
+        todoList.nuevoTodo(nuevoTodo);
+
+        crearTodoHtml(nuevoTodo);
+
+        event.target.value = '';
+
+        console.log(todoList);
+
+    };
+  
+});
