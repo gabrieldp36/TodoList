@@ -10,10 +10,12 @@ const divTodoList = document.querySelector('.todo-list');
 
 const txtInput = document.querySelector('.new-todo');
 
+const btnBorrar = document.querySelector('.clear-completed');
+
 export const crearTodoHtml = (todo) => {
 
     const htmlTodo = 
-     `<li class= ${ (todo.completado) ? "completed" : '' } data-id="${todo.id}">
+     `<li class= "${ (todo.completado) ? "completed" : '' }" data-id="${todo.id}">
             <div class="view">
                 <input class="toggle" type="checkbox" ${ (todo.completado) ? 'checked' : '' }>
                 <label>${todo.tarea}</label>
@@ -44,8 +46,44 @@ txtInput.addEventListener('keyup', (event) => {
 
         event.target.value = '';
 
-        console.log(todoList);
-
     };
   
+});
+
+divTodoList.addEventListener('click', (event) => {
+
+    const nombreElelemnto = event.target.localName;
+
+    const todoElemento = event.target.parentElement.parentElement;
+
+    const todoId = todoElemento.getAttribute('data-id');
+
+    if ( nombreElelemnto.includes('input') ) { 
+        
+        todoList.marcarCompletado(todoId);
+
+        todoElemento.classList.toggle('completed');
+
+        console.log(todoList)
+
+    } else if (nombreElelemnto.includes('button') ) {
+
+        todoList.eliminarTodo(todoId);
+
+        todoElemento.remove();
+        
+    };
+
+});
+
+btnBorrar.addEventListener('click', () => {
+    
+    todoList.eliminarCompletados();
+
+    const todoCompletados = document.querySelectorAll('.completed')
+
+    todoCompletados.forEach( completado => {
+        
+        completado.remove();
+    });
 });

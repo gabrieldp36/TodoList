@@ -304,11 +304,11 @@ body {
 
 .filters li a {
 	color: inherit;
-	margin: 3px;
-	padding: 3px 7px;
+	margin: 1px;
+	padding: 3px 3px 3px 3px;
 	text-decoration: none;
 	border: 1px solid transparent;
-	border-radius: 3px;
+	border-radius: 10px;
 }
 
 .filters li a:hover {
