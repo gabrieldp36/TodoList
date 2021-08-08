@@ -1,15 +1,18 @@
+import { Todo } from "./todo.class";
+
 export class TodoList {
 
     todos;
 
     constructor() {
 
-        this.todos = [];
+        this.cargarLocalStorage();
     };
 
     nuevoTodo(todo) {
 
         this.todos.push(todo);
+        this.guardarLocalStorage();
 
     };
 
@@ -22,6 +25,7 @@ export class TodoList {
                 const numeroIndice = this.todos.indexOf(todo)
 
                 this.todos.splice(numeroIndice, 1);
+                this.guardarLocalStorage();
                 break;
             };
         };
@@ -34,6 +38,7 @@ export class TodoList {
             if (todo.id == id) {
 
                 todo.completado =  !todo.completado;
+                this.guardarLocalStorage();
                 break;
             };
         };
@@ -42,8 +47,23 @@ export class TodoList {
     eliminarCompletados() {
 
         this.todos = this.todos.filter(todo => !todo.completado)
+        this.guardarLocalStorage();
 
     };
 
+    guardarLocalStorage() {
+
+        localStorage.setItem( 'todo', JSON.stringify( this.todos) );
+
+    };
+
+    cargarLocalStorage() {
+        
+        this.todos = ( localStorage.getItem('todo') ) 
+                        ? JSON.parse( localStorage.getItem('todo') )
+                            : [];
+        
+        this.todos = this.todos.map( objeto => Todo.fromJson(objeto) );
+    };   
 };
 
