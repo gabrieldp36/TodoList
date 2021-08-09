@@ -18,7 +18,7 @@ const anchorFilter = document.querySelectorAll(".filtro");
 
 const todoCount = document.querySelector("strong");
 
-let marcador = (todoCount.innerText = parseFloat (localStorage.getItem( 'marcadorPendientes')) );
+let marcador = (todoCount.innerText = localStorage.getItem( 'marcadorPendientes'));
 
 // Funciones.
 
