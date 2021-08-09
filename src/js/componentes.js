@@ -1,4 +1,4 @@
-// Importaciones y exportaciones.
+// Importaciones.
 
 import { Todo } from "../classes";
 
@@ -15,6 +15,12 @@ const btnBorrar = document.querySelector('.clear-completed');
 const ulFilters = document.querySelector(".filters");
 
 const anchorFilter = document.querySelectorAll(".filtro");
+
+const todoCount = document.querySelector("strong");
+
+let marcador = (todoCount.innerText = parseFloat (localStorage.getItem( 'marcadorPendientes')) );
+
+// Funciones.
 
 export const crearTodoHtml = (todo) => {
 
@@ -36,6 +42,32 @@ export const crearTodoHtml = (todo) => {
     return div.firstElementChild;
 };
 
+const guardarMarcadorLocalStorage = () => {
+    
+    localStorage.setItem( 'marcadorPendientes', marcador );
+
+};
+
+const sumarMarcadorPendientes = () => {
+    
+    marcador = marcador + 1;
+    
+    todoCount.innerText = `${marcador}`;
+
+    guardarMarcadorLocalStorage();
+ 
+};
+
+const restarMarcadorPendientes = () => {
+
+    marcador = marcador - 1;
+
+    todoCount.innerText = `${marcador}`;
+
+    guardarMarcadorLocalStorage();
+
+};
+
 // Eventos.
 
 txtInput.addEventListener('keyup', (event) => {
@@ -50,8 +82,9 @@ txtInput.addEventListener('keyup', (event) => {
 
         event.target.value = '';
 
+        sumarMarcadorPendientes();
+        
     };
-  
 });
 
 divTodoList.addEventListener('click', (event) => {
@@ -68,14 +101,29 @@ divTodoList.addEventListener('click', (event) => {
 
         todoElemento.classList.toggle('completed');
 
+        if (!todoElemento.classList.contains('completed') ) {
+
+            sumarMarcadorPendientes();
+
+
+        } else if (todoElemento.classList.contains('completed')) {
+
+            restarMarcadorPendientes();
+
+        };
+        
     } else if (nombreElelemnto.includes('button') ) {
 
         todoList.eliminarTodo(todoId);
 
         todoElemento.remove();
-        
-    };
 
+        if (!todoElemento.classList.contains('completed') ) {
+            
+            restarMarcadorPendientes();
+
+        };
+    };
 });
 
 btnBorrar.addEventListener('click', () => {
