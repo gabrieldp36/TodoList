@@ -50,7 +50,7 @@ const guardarMarcadorLocalStorage = () => {
 
 const sumarMarcadorPendientes = () => {
     
-    marcador = marcador + 1;
+    marcador ++;
     
     todoCount.innerText = `${marcador}`;
 
@@ -60,7 +60,7 @@ const sumarMarcadorPendientes = () => {
 
 const restarMarcadorPendientes = () => {
 
-    marcador = marcador - 1;
+    marcador --;
 
     todoCount.innerText = `${marcador}`;
 
