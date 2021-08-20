@@ -1,6 +1,6 @@
-# Webpack Starter
+# To Do List.
 
-Este es el proyecto inicial para crear aplicaciones utilizando Webpack.
+Esta aplicación permite crear tus listas de tareas.
 
 ### Notas:
 
