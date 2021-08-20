@@ -1,4 +1,4 @@
-# Webpack Starter
+# Esta aplicación permite crear tus listas de tareas.
 
 Este es el proyecto inicial para crear aplicaciones utilizando Webpack.
 
