@@ -72,7 +72,9 @@ const restarMarcadorPendientes = () => {
 
 txtInput.addEventListener('keyup', (event) => {
 
-    if (event.keyCode === 13 && event.target.value.length > 0) {
+    const texto = event.target.value.trim();
+
+    if (event.keyCode === 13 && texto.length > 0) {
 
         const nuevoTodo = new Todo (event.target.value);
 
